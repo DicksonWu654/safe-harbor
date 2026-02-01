@@ -18,7 +18,7 @@ This ensures deterministic addresses AND prevents front-running by other deploye
 
 ---
 
-## Expected Deployed Addresses (Ethereum Mainnet)
+## Expected Deployed Addresses (All Chains)
 
 | Contract | Expected Address |
 |----------|------------------|
@@ -31,20 +31,100 @@ These addresses are deterministic via CREATE3 and will be the same on all chains
 
 ---
 
-## Transactions Overview
+## Calldata Files Overview
 
-| TX # | Contract | Description | Calldata File |
-|------|----------|-------------|---------------|
-| 1 | **ChainValidator** (impl) | Implementation contract | `calldata/tx1-chainvalidator-impl.txt` |
-| 2 | **ERC1967Proxy** (proxy) | Upgradeable proxy | `calldata/tx2-chainvalidator-proxy.txt` |
-| 3 | **SafeHarborRegistry** | Main registry | `calldata/tx3-safeharborregistry.txt` |
-| 4 | **AgreementFactory** | Factory contract | `calldata/tx4-agreementfactory.txt` |
+The calldata is **chain-dependent** due to the SafeHarborRegistry constructor parameters (`legacyRegistry` address and `adopters` array).
+
+### Universal Calldata (0 Adopters)
+
+For chains with **no existing V2 adopter migrations**, use the `universal-*` files:
+
+| Chain | Files to Use |
+|-------|-------------|
+| Base | `universal-tx1/2/3/4` |
+| Optimism | `universal-tx1/2/3/4` |
+| Arbitrum | `universal-tx1/2/3/4` |
+| Avalanche | `universal-tx1/2/3/4` |
+| *Any new chain with 0 adopters* | `universal-tx1/2/3/4` |
+
+### Chain-Specific Calldata (Has Adopters)
+
+For chains with **existing V2 adopter migrations**, use chain-specific files:
+
+| Chain | Files to Use | Adopters |
+|-------|-------------|----------|
+| Ethereum Mainnet | `mainnet-tx1/2/3/4` | 13 |
+| Polygon | `polygon-tx1/2/3/4` | 3 (Ensuro, Polymarket, QuickSwap) |
+| BNB | `bnb-tx1/2/3/4` | 1 (PancakeSwap) |
+
+### Transaction Details
+
+| TX # | Contract | Description | Calldata File | Chain-Dependent? |
+|------|----------|-------------|---------------|------------------|
+| 1 | **ChainValidator** (impl) | Implementation contract | `tx1-chainvalidator-impl.txt` | ❌ No |
+| 2 | **ERC1967Proxy** (proxy) | Upgradeable proxy | `tx2-chainvalidator-proxy.txt` | ❌ No |
+| 3 | **SafeHarborRegistry** | Main registry | `tx3-safeharborregistry.txt` | ✅ Yes |
+| 4 | **AgreementFactory** | Factory contract | `tx4-agreementfactory.txt` | ❌ No |
 
 **All transactions go to CreateX:** `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`
 
 ---
 
-## How to Regenerate Calldata
+## How to Generate Calldata for a New Chain
+
+### Step 1: Check if the chain has existing V2 adopters
+
+Open `script/HelperConfig.s.sol` and check the `get<Chain>Config()` function:
+
+- If `adopters` array is **empty** → Use `universal-*` files
+- If `adopters` array has **entries** → Generate chain-specific calldata
+
+### Step 2: Generate calldata (if needed)
+
+```bash
+cd registry-contracts
+
+# Simulate deployment for your chain
+forge script script/Deploy.s.sol:DeploySafeHarbor \
+  --rpc-url <YOUR_CHAIN_RPC_URL> \
+  --sender 0xD9b8653Ab0bBa82C397b350F7319bA0c76d9F26a \
+  -vvv
+```
+
+### Step 3: Extract calldata
+
+```bash
+# Create calldata directory
+mkdir -p calldata
+
+# Extract each transaction's calldata
+CHAIN_ID=<your_chain_id>
+cat broadcast/Deploy.s.sol/${CHAIN_ID}/dry-run/run-latest.json | jq -r '.transactions[0].transaction.input' > calldata/<chain>-tx1-chainvalidator-impl.txt
+cat broadcast/Deploy.s.sol/${CHAIN_ID}/dry-run/run-latest.json | jq -r '.transactions[1].transaction.input' > calldata/<chain>-tx2-chainvalidator-proxy.txt
+cat broadcast/Deploy.s.sol/${CHAIN_ID}/dry-run/run-latest.json | jq -r '.transactions[2].transaction.input' > calldata/<chain>-tx3-safeharborregistry.txt
+cat broadcast/Deploy.s.sol/${CHAIN_ID}/dry-run/run-latest.json | jq -r '.transactions[3].transaction.input' > calldata/<chain>-tx4-agreementfactory.txt
+```
+
+### Step 4: Validate the calldata
+
+Compare TX1, TX2, TX4 with universal files (should be identical):
+
+```bash
+# TX1 should match
+diff calldata/universal-tx1-chainvalidator-impl.txt calldata/<chain>-tx1-chainvalidator-impl.txt
+
+# TX2 should match
+diff calldata/universal-tx2-chainvalidator-proxy.txt calldata/<chain>-tx2-chainvalidator-proxy.txt
+
+# TX4 should match
+diff calldata/universal-tx4-agreementfactory.txt calldata/<chain>-tx4-agreementfactory.txt
+
+# TX3 will differ (contains chain-specific adopters)
+```
+
+---
+
+## How to Regenerate All Calldata (Reference)
 
 ### Step 1: Run the deployment simulation
 
@@ -52,7 +132,7 @@ These addresses are deterministic via CREATE3 and will be the same on all chains
 cd registry-contracts
 
 # Simulate deployment (dry run)
-forge script script/Deploy.s.sol \
+forge script script/Deploy.s.sol:DeploySafeHarbor \
   --rpc-url https://ethereum-rpc.publicnode.com \
   --sender 0xD9b8653Ab0bBa82C397b350F7319bA0c76d9F26a \
   -vvv
@@ -61,7 +141,7 @@ forge script script/Deploy.s.sol \
 This will output:
 - Expected deployed addresses
 - Gas estimates
-- Save transaction data to `broadcast/Deploy.s.sol/1/dry-run/run-latest.json`
+- Save transaction data to `broadcast/Deploy.s.sol/<chain_id>/dry-run/run-latest.json`
 
 ### Step 2: Extract calldata to individual files
 
@@ -70,17 +150,17 @@ This will output:
 mkdir -p calldata
 
 # Extract each transaction's calldata
-cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[0].transaction.input' > calldata/tx1-chainvalidator-impl.txt
-cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[1].transaction.input' > calldata/tx2-chainvalidator-proxy.txt
-cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[2].transaction.input' > calldata/tx3-safeharborregistry.txt
-cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[3].transaction.input' > calldata/tx4-agreementfactory.txt
+cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[0].transaction.input' > calldata/mainnet-tx1-chainvalidator-impl.txt
+cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[1].transaction.input' > calldata/mainnet-tx2-chainvalidator-proxy.txt
+cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[2].transaction.input' > calldata/mainnet-tx3-safeharborregistry.txt
+cat broadcast/Deploy.s.sol/1/dry-run/run-latest.json | jq -r '.transactions[3].transaction.input' > calldata/mainnet-tx4-agreementfactory.txt
 ```
 
 ### Step 3: Verify calldata files exist
 
 ```bash
 ls -la calldata/
-# Should show 4 files with the calldata
+# Should show files with the calldata
 ```
 
 ---
@@ -144,7 +224,7 @@ To verify the deployment bytecode matches source:
 4. For each transaction (TX 1-4):
    - **To:** `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`
    - **Value:** `0`
-   - **Data:** Copy from `calldata/tx{N}-*.txt`
+   - **Data:** Copy from appropriate `calldata/*-tx{N}-*.txt` file
 5. Submit all 4 transactions in order
 
 ### Option B: Using Frame Wallet
@@ -152,7 +232,7 @@ To verify the deployment bytecode matches source:
 If using [Frame](https://frame.sh/) with your Safe connected:
 
 ```bash
-forge script script/Deploy.s.sol \
+forge script script/Deploy.s.sol:DeploySafeHarbor \
   --rpc-url http://127.0.0.1:1248 \
   --sender 0xD9b8653Ab0bBa82C397b350F7319bA0c76d9F26a \
   --broadcast
