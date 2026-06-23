@@ -1,0 +1,340 @@
+{
+  "protocolName": "1inch",
+  "agreementURI": "https://github.com/security-alliance/safe-harbor/blob/main/documents/agreement.pdf",
+  "contactDetails": [
+    {
+      "name": "Legal Department",
+      "contact": "legal@1inch.com"
+    },
+    {
+      "name": "Information Technology Department",
+      "contact": "security@1inch.com"
+    },
+    {
+      "name": "Data Privacy",
+      "contact": "privacy@1inch.com"
+    }
+  ],
+  "bountyTerms": {
+    "bountyPercentage": 10,
+    "bountyCapUSD": 500000,
+    "aggregateBountyCapUSD": 500000,
+    "retainable": false,
+    "identity": 1,
+    "diligenceRequirements": "Whitehats must notify 1inch Security immediately upon initiating any rescue action; provide full written disclosure of the vulnerability, rescue methodology, and all addresses used within 24 hours; execute and adhere to an NDA until 1inch confirms the vulnerability has been patched and publicly disclosed; not be sanctioned or owned or controlled by sanctioned persons; cooperate with sanctions and AML screening before bounty disbursement; and, for rescues over USD 250,000 gross exploited value, provide reasonable cooperation with a forensic investigation conducted by an independent incident-response firm engaged by 1inch. Excludes blackhats, accomplices, and former insiders within the 12-month look-back. Where 1inch has reasonable doubt as to compliance, 1inch may require additional information sufficient to verify identity, jurisdiction, and beneficial ownership as a precondition to bounty disbursement."
+  },
+  "chains": [
+    {
+      "caip2ChainId": "eip155:1",
+      "assetRecoveryAddress": "0x7910a10c8c9551c04f69904Be9FF1EE40393FC64",
+      "accounts": [
+        {
+          "accountAddress": "0x111111111117dC0aa78b770fA6A738034120C302",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x9A0C8Ff858d273f57072D714bca7411D717501D7",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x399740157391a9f1bf4e9921a8834f9bc8f2678e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    },
+    {
+      "caip2ChainId": "eip155:8453",
+      "assetRecoveryAddress": "0x3b675cF8Fa7bD1Ad47Ffb03fE3EEcd9a9e234C56",
+      "accounts": [
+        {
+          "accountAddress": "0xc5fecC3a29Fb57B5024eEc8a2239d4621e111CBE",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x2ad5004c60e16e54d5007c80ce329adde5b51ef5",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    },
+    {
+      "caip2ChainId": "eip155:8217",
+      "assetRecoveryAddress": "0xF1089Db23cD8f6475447e779b91B1bb8719846a3",
+      "accounts": [
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x2ad5004c60e16e54d5007c80ce329adde5b51ef5",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    },
+    {
+      "caip2ChainId": "eip155:1313161554",
+      "assetRecoveryAddress": "0xF1089Db23cD8f6475447e779b91B1bb8719846a3",
+      "accounts": [
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x2ad5004c60e16e54d5007c80ce329adde5b51ef5",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    },
+    {
+      "caip2ChainId": "eip155:250",
+      "assetRecoveryAddress": "0xF1089Db23cD8f6475447e779b91B1bb8719846a3",
+      "accounts": [
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x2ad5004c60e16e54d5007c80ce329adde5b51ef5",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    },
+    {
+      "caip2ChainId": "eip155:43114",
+      "assetRecoveryAddress": "0x3b675cF8Fa7bD1Ad47Ffb03fE3EEcd9a9e234C56",
+      "accounts": [
+        {
+          "accountAddress": "0x111111125421cA6dc452d289314280a0f8842A65",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAcce5500000f71A32B5E5514D1577E14b7aacC4a",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xabd4e5fb590aa132749bbf2a04ea57efbaac399e",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x2ad5004c60e16e54d5007c80ce329adde5b51ef5",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xAccE550000863572B867E661647CD7D97b72C507",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xad3b67BCA8935Cb510C8D18bD45F0b94F54A968f",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x03a25b3215a0e5c15cf23ac4d2e5cf86c0ff7efa",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xACCe550000159e70908C0499a1119D04e7039C28",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x33b41fe18d3a39046ad672f8a0c8c415454f629c",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0x4a055aa172c98ec32de118b9b5b6ac8b4099a580",
+          "childContractScope": 2
+        },
+        {
+          "accountAddress": "0xdfd05fe230bfe7b212878414270c72c8345506fa",
+          "childContractScope": 2
+        }
+      ]
+    }
+  ]
+}
